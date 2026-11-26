@@ -1,0 +1,181 @@
+{
+  "steps": {
+    "a_cross_agent": {
+      "memory_add_as_triage": {
+        "skipped": true,
+        "reason": "already present"
+      },
+      "memory_search_as_specialist": {
+        "found_marker": true,
+        "n_results": 1
+      },
+      "context_search_as_specialist": {
+        "found_marker": true,
+        "n_memory_hits": 1,
+        "match_quality": "mid",
+        "first_hit": {
+          "memory_id": "d2b99083-53a4-4d49-af94-45afcfd939e6",
+          "text": "FIX [C1 spike]: Stripe webhook 400 after API key rotation \u2014 rotate the webhook signing secret in OrderLoop. SPIKE-MARKER-7Q3Z9 This is a spike-test memory, not a real fix.",
+          "score": 0.6664513111279017,
+          "metadata": {
+            "source": "agent",
+            "cluster": "C1",
+            "ticket_id": "SPIKE-001",
+            "memory_key": "SPIKE-001",
+            "meko_datapack_id": "9e3216dd-7e33-4a60-b1e9-2bfb690d7e71"
+          }
+        }
+      },
+      "memory_get_all_regular": {
+        "found_marker": false,
+        "n": 0
+      },
+      "verdict": "cross-agent readable WITHOUT promote"
+    },
+    "b_kb_upload": {
+      "docs": {
+        "kb-01-webhook-secret-rotation.md": {
+          "upload": "{\"datapack_id\": \"9e3216dd-7e33-4a60-b1e9-2bfb690d7e71\", \"url\": \"https://meko-kb-uploads-launch-1.s3.us-east-2.amazonaws.com\", \"fields\": {\"X-Amz-Algorithm\": \"AWS4-HMAC-SHA256\", \"X-Amz-Credential\": \"AKIA26DARBTXWPOBV2SI/20261125/us-east-2/s3/aws4_request\", \"X-Amz-Date\": \"20261125T175323Z\", \"X-Amz-Sign",
+          "status": "{\"index_name\": \"datapacks.knowledge_bases\", \"source_uri\": \"s3://meko-kb-uploads-launch-1/cfd85b06-547f-462c-8331-64499c82623f/9e3216dd-7e33-4a60-b1e9-2bfb690d7e71/\", \"document_name\": \"cfd85b06-547f-462c-8331-64499c82623f/9e3216dd-7e33-4a60-b1e9-2bfb690d7e71/dfeea21248e7e6b3d88dcf1e219af54098b6e2aa35b053b09c636b58f54e90b2/kb-01-webhook-secret-rotation.md\", \"document_status\": \"COMPLETED\", \"chunks_pr"
+        },
+        "kb-02-saml-setup-certificate-renewal.md": {
+          "upload": "{\"datapack_id\": \"9e3216dd-7e33-4a60-b1e9-2bfb690d7e71\", \"url\": \"https://meko-kb-uploads-launch-1.s3.us-east-2.amazonaws.com\", \"fields\": {\"X-Amz-Algorithm\": \"AWS4-HMAC-SHA256\", \"X-Amz-Credential\": \"AKIA26DARBTXWPOBV2SI/20261125/us-east-2/s3/aws4_request\", \"X-Amz-Date\": \"20261125T175343Z\", \"X-Amz-Sign",
+          "status": "{\"index_name\": \"datapacks.knowledge_bases\", \"source_uri\": \"s3://meko-kb-uploads-launch-1/cfd85b06-547f-462c-8331-64499c82623f/9e3216dd-7e33-4a60-b1e9-2bfb690d7e71/\", \"document_name\": \"cfd85b06-547f-462c-8331-64499c82623f/9e3216dd-7e33-4a60-b1e9-2bfb690d7e71/dbbbf9a92e26f8f564491a9fd7b09ef28d071defe5fbd0dc7abd5e77b22acc7b/kb-02-saml-setup-certificate-renewal.md\", \"document_status\": \"PROCESSING\", \"c"
+        }
+      }
+    },
+    "c_e2e": {
+      "summary": {
+        "first-time": {
+          "n": 1,
+          "n_passed_quality": 0,
+          "m1_seconds": {
+            "mean": 13.7,
+            "median": 13.7,
+            "min": 13.7,
+            "max": 13.7
+          },
+          "m4_total_tokens": {
+            "mean": 3046,
+            "median": 3046,
+            "min": 3046,
+            "max": 3046
+          },
+          "m5_steps": {
+            "mean": 0.0,
+            "median": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "m8_quality_auto": {
+            "mean": 60.0,
+            "median": 60.0,
+            "min": 60.0,
+            "max": 60.0
+          },
+          "m10_cost_usd": 0.0,
+          "hit_rate": null,
+          "abstention_rate": null,
+          "escalation_rate": 1.0,
+          "verified_rate": 0.0,
+          "protocol_violations": 0,
+          "tpt_passed": null
+        },
+        "repeat": {
+          "n": 2,
+          "n_passed_quality": 2,
+          "m1_seconds": {
+            "mean": 71.72,
+            "median": 71.72,
+            "min": 59.74,
+            "max": 83.7
+          },
+          "m4_total_tokens": {
+            "mean": 2589,
+            "median": 2589.0,
+            "min": 1688,
+            "max": 3490
+          },
+          "m5_steps": {
+            "mean": 4.5,
+            "median": 4.5,
+            "min": 4.0,
+            "max": 5.0
+          },
+          "m8_quality_auto": {
+            "mean": 84.5,
+            "median": 84.5,
+            "min": 79.0,
+            "max": 90.0
+          },
+          "m10_cost_usd": 0.0,
+          "hit_rate": 0.5,
+          "abstention_rate": null,
+          "escalation_rate": 0.0,
+          "verified_rate": 0.0,
+          "protocol_violations": 0,
+          "tpt_passed": 2589.0
+        },
+        "all": {
+          "n": 3,
+          "n_passed_quality": 2,
+          "m1_seconds": {
+            "mean": 52.38,
+            "median": 59.74,
+            "min": 13.7,
+            "max": 83.7
+          },
+          "m4_total_tokens": {
+            "mean": 2741.33,
+            "median": 3046,
+            "min": 1688,
+            "max": 3490
+          },
+          "m5_steps": {
+            "mean": 3.0,
+            "median": 4.0,
+            "min": 0.0,
+            "max": 5.0
+          },
+          "m8_quality_auto": {
+            "mean": 76.33,
+            "median": 79.0,
+            "min": 60.0,
+            "max": 90.0
+          },
+          "m10_cost_usd": 0.0,
+          "hit_rate": 0.5,
+          "abstention_rate": null,
+          "escalation_rate": 0.333,
+          "verified_rate": 0.0,
+          "protocol_violations": 0,
+          "tpt_passed": 2589.0
+        }
+      },
+      "gemini_tokens": {
+        "input": 5899,
+        "output": 2325,
+        "total": 8224
+      }
+    }
+  },
+  "datapack_id": "9e3216dd-7e33-4a60-b1e9-2bfb690d7e71",
+  "e2e_datapack_id": "7e1853aa-0130-44f0-ac00-d2b2a64d4b6f",
+  "quota_ledger": {
+    "conversation_create": 6,
+    "datapack_list": 2,
+    "memory_search": 2,
+    "context_search": 4,
+    "memory_get_all": 1,
+    "knowledgebase_upload_document": 4,
+    "knowledgebase_document_status": 4,
+    "datapack_create": 1,
+    "memory_add": 1,
+    "conversation_add_message": 3,
+    "gemini_tokens": {
+      "input": 5899,
+      "output": 2325,
+      "total": 8224
+    }
+  }
+}

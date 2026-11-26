@@ -1,0 +1,18 @@
+# Render Blueprint — OrderLoop Memory demo (free tier).
+# Deploys the FastAPI demo with the stub LLM + FakeMeko: no credentials,
+# no cost. Connect this repo in the Render dashboard, or `render blueprint`.
+services:
+  - type: web
+    name: orderloop-memory
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.server:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: LLM_KIND
+        value: stub
+      - key: MEKO_KIND
+        value: auto
+      - key: HITL_MODE
+        value: manual

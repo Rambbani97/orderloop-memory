@@ -1,0 +1,6 @@
+group,n,n_passed_quality,m1_seconds_mean,m1_seconds_median,m4_tokens_mean,m4_tokens_median,m5_steps_mean,m8_quality_mean,tpt_passed,hit_rate,abstention_rate,escalation_rate,verified_rate,protocol_violations,m10_cost_usd_total
+first-time,8,6,20.94,10.86,3004.38,2773.0,2.62,74.4,2993.7,,,0.125,0.375,0,0.0
+repeat,16,9,27.37,15.95,3678.69,3746.5,2.19,64.98,3530.4,0.75,,0.25,0.188,0,0.0
+distractor,3,3,16.83,9.75,3466,2891,3.33,85.83,3466.0,,0.333,0.0,0.333,0,0.0
+unique,9,6,22.14,15.71,3491.89,3649,1.11,76.0,3000.3,,1.0,0.333,0.222,0,0.0
+all,36,24,23.75,15.17,3464.42,3104.0,2.11,71.57,3255.7,0.75,0.833,0.222,0.25,0,0.0

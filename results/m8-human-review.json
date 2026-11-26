@@ -1,0 +1,1111 @@
+{
+  "n": 72,
+  "method": "AI-assisted human review (Jarvis pre-labels Tinggi/Rendah visible; slider pre-set 85/45)",
+  "by_condition": {
+    "A": {
+      "n": 36,
+      "mean": 74.33,
+      "median": 85.0,
+      "pass_n": 26,
+      "pass_rate": 0.722,
+      "mean_tokens": 2036.6
+    },
+    "B": {
+      "n": 36,
+      "mean": 76.67,
+      "median": 85.0,
+      "pass_n": 26,
+      "pass_rate": 0.722,
+      "mean_tokens": 3019.8
+    }
+  },
+  "by_run": {
+    "A1": {
+      "n": 12,
+      "mean": 70.83,
+      "median": 85.0,
+      "pass_n": 8,
+      "pass_rate": 0.667,
+      "mean_tokens": 2134.4
+    },
+    "A2": {
+      "n": 12,
+      "mean": 73.42,
+      "median": 85.0,
+      "pass_n": 8,
+      "pass_rate": 0.667,
+      "mean_tokens": 2003.2
+    },
+    "A3": {
+      "n": 12,
+      "mean": 78.75,
+      "median": 85.0,
+      "pass_n": 10,
+      "pass_rate": 0.833,
+      "mean_tokens": 1972.3
+    },
+    "B1": {
+      "n": 12,
+      "mean": 75.17,
+      "median": 85.0,
+      "pass_n": 8,
+      "pass_rate": 0.667,
+      "mean_tokens": 3547.1
+    },
+    "B2": {
+      "n": 12,
+      "mean": 73.67,
+      "median": 85.0,
+      "pass_n": 8,
+      "pass_rate": 0.667,
+      "mean_tokens": 2784.8
+    },
+    "B3": {
+      "n": 12,
+      "mean": 81.17,
+      "median": 85.0,
+      "pass_n": 10,
+      "pass_rate": 0.833,
+      "mean_tokens": 2727.7
+    }
+  },
+  "by_cluster_condition": {
+    "C1/A": {
+      "n": 3,
+      "mean": 71.67,
+      "median": 85,
+      "pass_n": 2,
+      "pass_rate": 0.667,
+      "mean_tokens": 2399.3
+    },
+    "C1/B": {
+      "n": 3,
+      "mean": 71.67,
+      "median": 85,
+      "pass_n": 2,
+      "pass_rate": 0.667,
+      "mean_tokens": 2341.7
+    },
+    "C2/A": {
+      "n": 3,
+      "mean": 58.33,
+      "median": 45,
+      "pass_n": 1,
+      "pass_rate": 0.333,
+      "mean_tokens": 2323.7
+    },
+    "C2/B": {
+      "n": 3,
+      "mean": 58.33,
+      "median": 45,
+      "pass_n": 1,
+      "pass_rate": 0.333,
+      "mean_tokens": 2422
+    },
+    "C3/A": {
+      "n": 3,
+      "mean": 86.67,
+      "median": 85,
+      "pass_n": 3,
+      "pass_rate": 1.0,
+      "mean_tokens": 1719.7
+    },
+    "C3/B": {
+      "n": 3,
+      "mean": 90.33,
+      "median": 87,
+      "pass_n": 3,
+      "pass_rate": 1.0,
+      "mean_tokens": 2313.3
+    },
+    "C4/A": {
+      "n": 3,
+      "mean": 73.33,
+      "median": 85,
+      "pass_n": 2,
+      "pass_rate": 0.667,
+      "mean_tokens": 1621.7
+    },
+    "C4/B": {
+      "n": 3,
+      "mean": 73,
+      "median": 85,
+      "pass_n": 2,
+      "pass_rate": 0.667,
+      "mean_tokens": 3793
+    },
+    "C5/A": {
+      "n": 3,
+      "mean": 73.33,
+      "median": 85,
+      "pass_n": 2,
+      "pass_rate": 0.667,
+      "mean_tokens": 1677.3
+    },
+    "C5/B": {
+      "n": 3,
+      "mean": 71.67,
+      "median": 85,
+      "pass_n": 2,
+      "pass_rate": 0.667,
+      "mean_tokens": 4184.7
+    },
+    "C6/A": {
+      "n": 3,
+      "mean": 58.33,
+      "median": 45,
+      "pass_n": 1,
+      "pass_rate": 0.333,
+      "mean_tokens": 2779.3
+    },
+    "C6/B": {
+      "n": 3,
+      "mean": 43.33,
+      "median": 45,
+      "pass_n": 0,
+      "pass_rate": 0.0,
+      "mean_tokens": 3226.3
+    },
+    "C7/A": {
+      "n": 3,
+      "mean": 60.33,
+      "median": 45,
+      "pass_n": 1,
+      "pass_rate": 0.333,
+      "mean_tokens": 2420
+    },
+    "C7/B": {
+      "n": 3,
+      "mean": 88.33,
+      "median": 90,
+      "pass_n": 3,
+      "pass_rate": 1.0,
+      "mean_tokens": 3977
+    },
+    "C8/A": {
+      "n": 3,
+      "mean": 88.33,
+      "median": 85,
+      "pass_n": 3,
+      "pass_rate": 1.0,
+      "mean_tokens": 1729.3
+    },
+    "C8/B": {
+      "n": 3,
+      "mean": 90,
+      "median": 85,
+      "pass_n": 3,
+      "pass_rate": 1.0,
+      "mean_tokens": 3252
+    },
+    "distractor/A": {
+      "n": 3,
+      "mean": 81.67,
+      "median": 85,
+      "pass_n": 3,
+      "pass_rate": 1.0,
+      "mean_tokens": 1724.7
+    },
+    "distractor/B": {
+      "n": 3,
+      "mean": 90,
+      "median": 90,
+      "pass_n": 3,
+      "pass_rate": 1.0,
+      "mean_tokens": 2657
+    },
+    "unique/A": {
+      "n": 9,
+      "mean": 80,
+      "median": 85,
+      "pass_n": 8,
+      "pass_rate": 0.889,
+      "mean_tokens": 2014.9
+    },
+    "unique/B": {
+      "n": 9,
+      "mean": 81.11,
+      "median": 85,
+      "pass_n": 7,
+      "pass_rate": 0.778,
+      "mean_tokens": 2690.3
+    }
+  },
+  "by_kind_condition": {
+    "distractor/A": {
+      "n": 3,
+      "mean": 81.67,
+      "median": 85,
+      "pass_n": 3,
+      "pass_rate": 1.0,
+      "mean_tokens": 1724.7
+    },
+    "distractor/B": {
+      "n": 3,
+      "mean": 90,
+      "median": 90,
+      "pass_n": 3,
+      "pass_rate": 1.0,
+      "mean_tokens": 2657
+    },
+    "first-time/A": {
+      "n": 11,
+      "mean": 79.64,
+      "median": 85,
+      "pass_n": 9,
+      "pass_rate": 0.818,
+      "mean_tokens": 1905.3
+    },
+    "first-time/B": {
+      "n": 6,
+      "mean": 73.67,
+      "median": 85.0,
+      "pass_n": 4,
+      "pass_rate": 0.667,
+      "mean_tokens": 3049.5
+    },
+    "repeat/A": {
+      "n": 13,
+      "mean": 64.23,
+      "median": 45,
+      "pass_n": 6,
+      "pass_rate": 0.462,
+      "mean_tokens": 2234.8
+    },
+    "repeat/B": {
+      "n": 18,
+      "mean": 73.22,
+      "median": 85.0,
+      "pass_n": 12,
+      "pass_rate": 0.667,
+      "mean_tokens": 3235.2
+    },
+    "unique/A": {
+      "n": 9,
+      "mean": 80,
+      "median": 85,
+      "pass_n": 8,
+      "pass_rate": 0.889,
+      "mean_tokens": 2014.9
+    },
+    "unique/B": {
+      "n": 9,
+      "mean": 81.11,
+      "median": 85,
+      "pass_n": 7,
+      "pass_rate": 0.778,
+      "mean_tokens": 2690.3
+    }
+  },
+  "anchoring": {
+    "scores_at_default_85_or_45": 51,
+    "share": 0.708,
+    "mean_abs_diff_human_auto": 9.53,
+    "pass_agreement_with_auto": "71/72"
+  },
+  "pass_both": {
+    "tickets_in_sample": 33,
+    "tickets_with_both_conditions": 21,
+    "pass_both": 12,
+    "pass_A_only": 5,
+    "pass_B_only": 4,
+    "pass_neither": 0,
+    "mean_tokens_A_pass_both_tickets": 2047.0,
+    "mean_tokens_B_pass_both_tickets": 2887.2,
+    "token_delta_pct_B_vs_A": 41.0
+  },
+  "rows": [
+    {
+      "blind_id": "S-001",
+      "run": "A1",
+      "condition": "A",
+      "ticket_id": "D-03",
+      "cluster": "distractor",
+      "kind": "distractor",
+      "human": 70,
+      "auto": 47.5,
+      "tokens": 1791
+    },
+    {
+      "blind_id": "S-062",
+      "run": "A1",
+      "condition": "A",
+      "ticket_id": "T-002",
+      "cluster": "C1",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 54.0,
+      "tokens": 3641
+    },
+    {
+      "blind_id": "S-037",
+      "run": "A1",
+      "condition": "A",
+      "ticket_id": "T-004",
+      "cluster": "C2",
+      "kind": "first-time",
+      "human": 45,
+      "auto": 50.0,
+      "tokens": 1680
+    },
+    {
+      "blind_id": "S-044",
+      "run": "A1",
+      "condition": "A",
+      "ticket_id": "T-008",
+      "cluster": "C3",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 88.0,
+      "tokens": 1725
+    },
+    {
+      "blind_id": "S-028",
+      "run": "A1",
+      "condition": "A",
+      "ticket_id": "T-012",
+      "cluster": "C4",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 85.0,
+      "tokens": 1611
+    },
+    {
+      "blind_id": "S-061",
+      "run": "A1",
+      "condition": "A",
+      "ticket_id": "T-013",
+      "cluster": "C5",
+      "kind": "first-time",
+      "human": 90,
+      "auto": 74.7,
+      "tokens": 1645
+    },
+    {
+      "blind_id": "S-040",
+      "run": "A1",
+      "condition": "A",
+      "ticket_id": "T-018",
+      "cluster": "C6",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 60.0,
+      "tokens": 3309
+    },
+    {
+      "blind_id": "S-034",
+      "run": "A1",
+      "condition": "A",
+      "ticket_id": "T-019",
+      "cluster": "C7",
+      "kind": "first-time",
+      "human": 45,
+      "auto": 49.0,
+      "tokens": 3673
+    },
+    {
+      "blind_id": "S-030",
+      "run": "A1",
+      "condition": "A",
+      "ticket_id": "T-022",
+      "cluster": "C8",
+      "kind": "first-time",
+      "human": 85,
+      "auto": 80.0,
+      "tokens": 1639
+    },
+    {
+      "blind_id": "S-039",
+      "run": "A1",
+      "condition": "A",
+      "ticket_id": "U-02",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 85,
+      "auto": 80.0,
+      "tokens": 1721
+    },
+    {
+      "blind_id": "S-022",
+      "run": "A1",
+      "condition": "A",
+      "ticket_id": "U-05",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 85,
+      "auto": 89.0,
+      "tokens": 1551
+    },
+    {
+      "blind_id": "S-012",
+      "run": "A1",
+      "condition": "A",
+      "ticket_id": "U-08",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 85,
+      "auto": 87.5,
+      "tokens": 1627
+    },
+    {
+      "blind_id": "S-067",
+      "run": "A2",
+      "condition": "A",
+      "ticket_id": "D-02",
+      "cluster": "distractor",
+      "kind": "distractor",
+      "human": 85,
+      "auto": 100.0,
+      "tokens": 1683
+    },
+    {
+      "blind_id": "S-036",
+      "run": "A2",
+      "condition": "A",
+      "ticket_id": "T-001",
+      "cluster": "C1",
+      "kind": "first-time",
+      "human": 85,
+      "auto": 81.7,
+      "tokens": 1817
+    },
+    {
+      "blind_id": "S-026",
+      "run": "A2",
+      "condition": "A",
+      "ticket_id": "T-006",
+      "cluster": "C2",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 55.0,
+      "tokens": 1733
+    },
+    {
+      "blind_id": "S-023",
+      "run": "A2",
+      "condition": "A",
+      "ticket_id": "T-007",
+      "cluster": "C3",
+      "kind": "first-time",
+      "human": 90,
+      "auto": 100.0,
+      "tokens": 1817
+    },
+    {
+      "blind_id": "S-063",
+      "run": "A2",
+      "condition": "A",
+      "ticket_id": "T-011",
+      "cluster": "C4",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 66.7,
+      "tokens": 1628
+    },
+    {
+      "blind_id": "S-021",
+      "run": "A2",
+      "condition": "A",
+      "ticket_id": "T-014",
+      "cluster": "C5",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 69.7,
+      "tokens": 1723
+    },
+    {
+      "blind_id": "S-017",
+      "run": "A2",
+      "condition": "A",
+      "ticket_id": "T-018",
+      "cluster": "C6",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 60.0,
+      "tokens": 3210
+    },
+    {
+      "blind_id": "S-046",
+      "run": "A2",
+      "condition": "A",
+      "ticket_id": "T-019",
+      "cluster": "C7",
+      "kind": "first-time",
+      "human": 91,
+      "auto": 79.0,
+      "tokens": 1878
+    },
+    {
+      "blind_id": "S-031",
+      "run": "A2",
+      "condition": "A",
+      "ticket_id": "T-024",
+      "cluster": "C8",
+      "kind": "repeat",
+      "human": 95,
+      "auto": 80.0,
+      "tokens": 1849
+    },
+    {
+      "blind_id": "S-005",
+      "run": "A2",
+      "condition": "A",
+      "ticket_id": "U-02",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 85,
+      "auto": 75.0,
+      "tokens": 1783
+    },
+    {
+      "blind_id": "S-071",
+      "run": "A2",
+      "condition": "A",
+      "ticket_id": "U-04",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 85,
+      "auto": 84.0,
+      "tokens": 3295
+    },
+    {
+      "blind_id": "S-035",
+      "run": "A2",
+      "condition": "A",
+      "ticket_id": "U-05",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 85,
+      "auto": 84.0,
+      "tokens": 1622
+    },
+    {
+      "blind_id": "S-009",
+      "run": "A3",
+      "condition": "A",
+      "ticket_id": "D-03",
+      "cluster": "distractor",
+      "kind": "distractor",
+      "human": 90,
+      "auto": 72.5,
+      "tokens": 1700
+    },
+    {
+      "blind_id": "S-029",
+      "run": "A3",
+      "condition": "A",
+      "ticket_id": "T-002",
+      "cluster": "C1",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 81.7,
+      "tokens": 1740
+    },
+    {
+      "blind_id": "S-013",
+      "run": "A3",
+      "condition": "A",
+      "ticket_id": "T-006",
+      "cluster": "C2",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 70.0,
+      "tokens": 3558
+    },
+    {
+      "blind_id": "S-045",
+      "run": "A3",
+      "condition": "A",
+      "ticket_id": "T-009",
+      "cluster": "C3",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 93.0,
+      "tokens": 1617
+    },
+    {
+      "blind_id": "S-002",
+      "run": "A3",
+      "condition": "A",
+      "ticket_id": "T-010",
+      "cluster": "C4",
+      "kind": "first-time",
+      "human": 90,
+      "auto": 71.7,
+      "tokens": 1626
+    },
+    {
+      "blind_id": "S-053",
+      "run": "A3",
+      "condition": "A",
+      "ticket_id": "T-013",
+      "cluster": "C5",
+      "kind": "first-time",
+      "human": 85,
+      "auto": 74.7,
+      "tokens": 1664
+    },
+    {
+      "blind_id": "S-011",
+      "run": "A3",
+      "condition": "A",
+      "ticket_id": "T-016",
+      "cluster": "C6",
+      "kind": "first-time",
+      "human": 85,
+      "auto": 90.0,
+      "tokens": 1819
+    },
+    {
+      "blind_id": "S-048",
+      "run": "A3",
+      "condition": "A",
+      "ticket_id": "T-020",
+      "cluster": "C7",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 58.0,
+      "tokens": 1709
+    },
+    {
+      "blind_id": "S-042",
+      "run": "A3",
+      "condition": "A",
+      "ticket_id": "T-022",
+      "cluster": "C8",
+      "kind": "first-time",
+      "human": 85,
+      "auto": 80.0,
+      "tokens": 1700
+    },
+    {
+      "blind_id": "S-065",
+      "run": "A3",
+      "condition": "A",
+      "ticket_id": "U-01",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 85,
+      "auto": 70.0,
+      "tokens": 1607
+    },
+    {
+      "blind_id": "S-007",
+      "run": "A3",
+      "condition": "A",
+      "ticket_id": "U-02",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 85,
+      "auto": 100.0,
+      "tokens": 1751
+    },
+    {
+      "blind_id": "S-025",
+      "run": "A3",
+      "condition": "A",
+      "ticket_id": "U-09",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 40,
+      "auto": 51.3,
+      "tokens": 3177
+    },
+    {
+      "blind_id": "S-004",
+      "run": "B1",
+      "condition": "B",
+      "ticket_id": "D-01",
+      "cluster": "distractor",
+      "kind": "distractor",
+      "human": 90,
+      "auto": 90.0,
+      "tokens": 2664
+    },
+    {
+      "blind_id": "S-066",
+      "run": "B1",
+      "condition": "B",
+      "ticket_id": "T-001",
+      "cluster": "C1",
+      "kind": "first-time",
+      "human": 45,
+      "auto": 49.0,
+      "tokens": 3285
+    },
+    {
+      "blind_id": "S-019",
+      "run": "B1",
+      "condition": "B",
+      "ticket_id": "T-004",
+      "cluster": "C2",
+      "kind": "first-time",
+      "human": 85,
+      "auto": 70.0,
+      "tokens": 3500
+    },
+    {
+      "blind_id": "S-014",
+      "run": "B1",
+      "condition": "B",
+      "ticket_id": "T-007",
+      "cluster": "C3",
+      "kind": "first-time",
+      "human": 87,
+      "auto": 100.0,
+      "tokens": 2189
+    },
+    {
+      "blind_id": "S-055",
+      "run": "B1",
+      "condition": "B",
+      "ticket_id": "T-011",
+      "cluster": "C4",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 80.0,
+      "tokens": 4548
+    },
+    {
+      "blind_id": "S-070",
+      "run": "B1",
+      "condition": "B",
+      "ticket_id": "T-015",
+      "cluster": "C5",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 55.0,
+      "tokens": 5440
+    },
+    {
+      "blind_id": "S-056",
+      "run": "B1",
+      "condition": "B",
+      "ticket_id": "T-017",
+      "cluster": "C6",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 37.5,
+      "tokens": 4883
+    },
+    {
+      "blind_id": "S-032",
+      "run": "B1",
+      "condition": "B",
+      "ticket_id": "T-020",
+      "cluster": "C7",
+      "kind": "repeat",
+      "human": 90,
+      "auto": 89.0,
+      "tokens": 4820
+    },
+    {
+      "blind_id": "S-024",
+      "run": "B1",
+      "condition": "B",
+      "ticket_id": "T-022",
+      "cluster": "C8",
+      "kind": "first-time",
+      "human": 100,
+      "auto": 70.0,
+      "tokens": 2508
+    },
+    {
+      "blind_id": "S-057",
+      "run": "B1",
+      "condition": "B",
+      "ticket_id": "U-01",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 100,
+      "auto": 90.0,
+      "tokens": 1783
+    },
+    {
+      "blind_id": "S-027",
+      "run": "B1",
+      "condition": "B",
+      "ticket_id": "U-04",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 45,
+      "auto": 49.0,
+      "tokens": 4821
+    },
+    {
+      "blind_id": "S-051",
+      "run": "B1",
+      "condition": "B",
+      "ticket_id": "U-08",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 85,
+      "auto": 97.5,
+      "tokens": 2124
+    },
+    {
+      "blind_id": "S-020",
+      "run": "B2",
+      "condition": "B",
+      "ticket_id": "D-03",
+      "cluster": "distractor",
+      "kind": "distractor",
+      "human": 85,
+      "auto": 92.5,
+      "tokens": 2597
+    },
+    {
+      "blind_id": "S-072",
+      "run": "B2",
+      "condition": "B",
+      "ticket_id": "T-002",
+      "cluster": "C1",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 81.7,
+      "tokens": 1928
+    },
+    {
+      "blind_id": "S-049",
+      "run": "B2",
+      "condition": "B",
+      "ticket_id": "T-006",
+      "cluster": "C2",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 35.0,
+      "tokens": 1726
+    },
+    {
+      "blind_id": "S-038",
+      "run": "B2",
+      "condition": "B",
+      "ticket_id": "T-008",
+      "cluster": "C3",
+      "kind": "repeat",
+      "human": 99,
+      "auto": 94.0,
+      "tokens": 2473
+    },
+    {
+      "blind_id": "S-054",
+      "run": "B2",
+      "condition": "B",
+      "ticket_id": "T-012",
+      "cluster": "C4",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 66.7,
+      "tokens": 2436
+    },
+    {
+      "blind_id": "S-069",
+      "run": "B2",
+      "condition": "B",
+      "ticket_id": "T-014",
+      "cluster": "C5",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 74.7,
+      "tokens": 2601
+    },
+    {
+      "blind_id": "S-018",
+      "run": "B2",
+      "condition": "B",
+      "ticket_id": "T-017",
+      "cluster": "C6",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 47.5,
+      "tokens": 2494
+    },
+    {
+      "blind_id": "S-064",
+      "run": "B2",
+      "condition": "B",
+      "ticket_id": "T-021",
+      "cluster": "C7",
+      "kind": "repeat",
+      "human": 90,
+      "auto": 94.0,
+      "tokens": 4591
+    },
+    {
+      "blind_id": "S-047",
+      "run": "B2",
+      "condition": "B",
+      "ticket_id": "T-023",
+      "cluster": "C8",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 80.0,
+      "tokens": 4726
+    },
+    {
+      "blind_id": "S-008",
+      "run": "B2",
+      "condition": "B",
+      "ticket_id": "U-01",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 90,
+      "auto": 80.0,
+      "tokens": 1860
+    },
+    {
+      "blind_id": "S-060",
+      "run": "B2",
+      "condition": "B",
+      "ticket_id": "U-02",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 85,
+      "auto": 84.0,
+      "tokens": 2392
+    },
+    {
+      "blind_id": "S-058",
+      "run": "B2",
+      "condition": "B",
+      "ticket_id": "U-05",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 45,
+      "auto": 49.0,
+      "tokens": 3593
+    },
+    {
+      "blind_id": "S-010",
+      "run": "B3",
+      "condition": "B",
+      "ticket_id": "D-03",
+      "cluster": "distractor",
+      "kind": "distractor",
+      "human": 95,
+      "auto": 72.5,
+      "tokens": 2710
+    },
+    {
+      "blind_id": "S-033",
+      "run": "B3",
+      "condition": "B",
+      "ticket_id": "T-002",
+      "cluster": "C1",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 75.7,
+      "tokens": 1812
+    },
+    {
+      "blind_id": "S-059",
+      "run": "B3",
+      "condition": "B",
+      "ticket_id": "T-005",
+      "cluster": "C2",
+      "kind": "repeat",
+      "human": 45,
+      "auto": 60.0,
+      "tokens": 2040
+    },
+    {
+      "blind_id": "S-003",
+      "run": "B3",
+      "condition": "B",
+      "ticket_id": "T-009",
+      "cluster": "C3",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 93.0,
+      "tokens": 2278
+    },
+    {
+      "blind_id": "S-041",
+      "run": "B3",
+      "condition": "B",
+      "ticket_id": "T-011",
+      "cluster": "C4",
+      "kind": "repeat",
+      "human": 89,
+      "auto": 80.0,
+      "tokens": 4395
+    },
+    {
+      "blind_id": "S-016",
+      "run": "B3",
+      "condition": "B",
+      "ticket_id": "T-013",
+      "cluster": "C5",
+      "kind": "first-time",
+      "human": 85,
+      "auto": 74.7,
+      "tokens": 4513
+    },
+    {
+      "blind_id": "S-043",
+      "run": "B3",
+      "condition": "B",
+      "ticket_id": "T-016",
+      "cluster": "C6",
+      "kind": "first-time",
+      "human": 40,
+      "auto": 42.5,
+      "tokens": 2302
+    },
+    {
+      "blind_id": "S-052",
+      "run": "B3",
+      "condition": "B",
+      "ticket_id": "T-020",
+      "cluster": "C7",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 89.0,
+      "tokens": 2520
+    },
+    {
+      "blind_id": "S-006",
+      "run": "B3",
+      "condition": "B",
+      "ticket_id": "T-024",
+      "cluster": "C8",
+      "kind": "repeat",
+      "human": 85,
+      "auto": 80.0,
+      "tokens": 2522
+    },
+    {
+      "blind_id": "S-050",
+      "run": "B3",
+      "condition": "B",
+      "ticket_id": "U-01",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 85,
+      "auto": 75.0,
+      "tokens": 1845
+    },
+    {
+      "blind_id": "S-015",
+      "run": "B3",
+      "condition": "B",
+      "ticket_id": "U-05",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 100,
+      "auto": 84.0,
+      "tokens": 3549
+    },
+    {
+      "blind_id": "S-068",
+      "run": "B3",
+      "condition": "B",
+      "ticket_id": "U-06",
+      "cluster": "unique",
+      "kind": "unique",
+      "human": 95,
+      "auto": 82.5,
+      "tokens": 2246
+    }
+  ]
+}

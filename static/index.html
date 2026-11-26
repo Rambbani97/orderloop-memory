@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OrderLoop Memory — ContextCon Demo</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, sans-serif; margin: 0 auto; max-width: 1080px; padding: 16px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .sub { color: #888; margin-bottom: 16px; }
+  .banner { background: #fff3cd; color: #664d03; border: 1px solid #ffecb5; padding: 8px 12px; border-radius: 6px; margin-bottom: 16px; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .tabs button { padding: 8px 14px; border: 1px solid #ccc; background: none; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+  .tabs button.active { background: #2563eb; color: #fff; border-color: #2563eb; }
+  .view { display: none; }
+  .view.active { display: block; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { border-bottom: 1px solid #ddd; padding: 6px 8px; text-align: left; vertical-align: top; }
+  tr:hover { background: #f5f5f5; }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 0.8rem; background: #e5e7eb; }
+  .pill.hit { background: #dcfce7; } .pill.miss { background: #fee2e2; }
+  .pill.abstain { background: #dbeafe; } .pill.na { background: #f3f4f6; }
+  .card { border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+  .trace { font-family: monospace; font-size: 0.85rem; white-space: pre-wrap; background: #111827; color: #e5e7eb; padding: 12px; border-radius: 6px; max-height: 400px; overflow: auto; }
+  button.run { background: #2563eb; color: #fff; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; }
+  button.approve { background: #16a34a; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+  button.reject { background: #dc2626; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+  select, input { padding: 6px; border-radius: 6px; border: 1px solid #ccc; }
+  .muted { color: #888; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<h1>OrderLoop Memory</h1>
+<p class="sub">Support agents with shared memory (Meko) — ContextCon Tema 2: Never Solve It Twice</p>
+<div class="banner" id="setup-banner">Loading setup…</div>
+
+<div class="tabs">
+  <button data-view="inbox" class="active">Inbox</button>
+  <button data-view="trace">Live Trace</button>
+  <button data-view="hitl">HITL Queue</button>
+  <button data-view="metrics">Metrics</button>
+</div>
+
+<section id="view-inbox" class="view active">
+  <p>
+    <label>Condition
+      <select id="condition">
+        <option value="B" selected>B — with Meko memory</option>
+        <option value="A">A — no memory (baseline)</option>
+      </select>
+    </label>
+    <button class="run" id="run-all">Run all 36 tickets</button>
+    <span class="muted" id="run-status"></span>
+  </p>
+  <table id="inbox-table">
+    <thead><tr><th>ID</th><th>Channel</th><th>From</th><th>Subject</th><th>Result</th><th></th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section id="view-trace" class="view">
+  <p>
+    <select id="trace-ticket"></select>
+    <button class="run" id="run-one">Run this ticket</button>
+  </p>
+  <div id="trace-out"><p class="muted">Pick a ticket and run it to see the agent's trace.</p></div>
+</section>
+
+<section id="view-hitl" class="view">
+  <p class="muted">Only human-approved fixes become memory. Agents never approve their own fixes.</p>
+  <div id="hitl-list"></div>
+</section>
+
+<section id="view-metrics" class="view">
+  <p class="muted">Summary from the latest run files (results/run-*-summary.json). Quality shown here is the automatic proxy (M8-auto); official quality comes from blind human rating.</p>
+  <div id="metrics-out"></div>
+</section>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const state = { tickets: [], status: {} };
+
+async function api(path, opts) {
+  const res = await fetch(path, opts);
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+function tab(name) {
+  document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('active', b.dataset.view === name));
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + name));
+  if (name === 'hitl') loadHitl();
+  if (name === 'metrics') loadMetrics();
+}
+document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => tab(b.dataset.view)));
+
+async function loadStatus() {
+  state.status = await api('/api/status');
+  const s = state.status.setup;
+  $('#setup-banner').textContent =
+    `LLM: ${s.llm} · Meko: ${s.meko} · ${s.quota_note}` +
+    (s.datapack_id ? ` · Datapack: ${s.datapack_id}` : '');
+}
+
+async function loadInbox() {
+  state.tickets = await api('/api/tickets');
+  const tbody = $('#inbox-table tbody');
+  tbody.innerHTML = '';
+  const sel = $('#trace-ticket');
+  sel.innerHTML = '';
+  for (const t of state.tickets) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${t.id}</td><td>${t.channel}</td><td>${t.persona.name}<br><span class="muted">${t.persona.company} · ${t.persona.plan}</span></td><td>${t.subject}</td><td data-result="${t.id}"><span class="muted">—</span></td><td><button data-run="${t.id}">Run</button></td>`;
+    tbody.appendChild(tr);
+    const opt = document.createElement('option');
+    opt.value = t.id; opt.textContent = `${t.id} — ${t.subject}`;
+    sel.appendChild(opt);
+  }
+  tbody.querySelectorAll('[data-run]').forEach(b => b.addEventListener('click', () => runTicket(b.dataset.run)));
+}
+
+function pill(ret) {
+  const cls = ret === 'hit' ? 'hit' : ret === 'miss' ? 'miss' : ret === 'correct_abstention' ? 'abstain' : 'na';
+  return `<span class="pill ${cls}">${ret}</span>`;
+}
+
+async function runTicket(ticketId) {
+  const cond = $('#condition').value;
+  const cell = document.querySelector(`[data-result="${ticketId}"]`);
+  if (cell) cell.innerHTML = '<span class="muted">running…</span>';
+  try {
+    const r = await api('/api/run-ticket', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ticket_id: ticketId, condition: cond }) });
+    if (!r.started) throw new Error('run did not start');
+    // The run is async: it waits for a HITL decision when a fix is
+    // proposed — approve/reject it in the HITL tab, then it finishes.
+    if (cell) cell.innerHTML = '<span class="muted">running… approve the fix in the HITL tab if one appears</span>';
+    await new Promise((resolve) => {
+      const iv = setInterval(async () => {
+        const s = await api('/api/run-status');
+        if (!s.running) { clearInterval(iv); resolve(); }
+      }, 2000);
+    });
+    const d = await api('/api/tickets/' + ticketId);
+    if (d.result) {
+      const m = d.result;
+      if (cell) cell.innerHTML = `${pill(m.m7_retrieval)} q=${m.m8_quality_auto} · ${m.m4_total_tokens} tok · ${m.m1_seconds}s`;
+      showTrace(m);
+    }
+    loadHitl(); loadStatus();
+  } catch (e) {
+    if (cell) cell.innerHTML = `<span class="muted">error</span>`;
+    alert('Run failed: ' + e.message);
+  }
+}
+
+function showTrace(m) {
+  tab('trace');
+  const el = $('#trace-out');
+  el.innerHTML = `<div class="card">
+    <strong>${m.ticket_id}</strong> — ${m.kind} · agent ${m.agent} · quality ${m.m8_quality_auto}/100 (auto proxy) · retrieval ${m.m7_retrieval} · verified ${m.verified} · escalated ${m.m9_escalated}
+    <p>Tokens in ${m.m2_input_tokens} / out ${m.m3_output_tokens} / total ${m.m4_total_tokens} · steps ${m.m5_steps} · ${m.m1_seconds}s · cost $${m.m10_cost_usd}</p>
+    <p>Tool calls: ${JSON.stringify(m.m6_tool_calls)}</p>
+    <p>HITL: ${m.hitl_status}</p></div>
+    <div class="trace">${m.trace.map(e => JSON.stringify(e)).join('\n')}</div>`;
+}
+
+async function loadHitl() {
+  const data = await api('/api/hitl');
+  const el = $('#hitl-list');
+  if (!data.pending.length) { el.innerHTML = '<p class="muted">Queue empty — nothing waiting for approval.</p>'; return; }
+  el.innerHTML = '';
+  for (const item of data.pending) {
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerHTML = `<strong>${item.ticket_id}</strong> · ${item.cluster} · proposed by ${item.proposed_by}
+      <pre>${item.memory_text}</pre>
+      <button class="approve">Approve → memory</button>
+      <select class="reason">
+        <option value="too_specific">too specific</option>
+        <option value="duplicate">duplicate</option>
+        <option value="wrong_fix">wrong fix</option>
+        <option value="sensitive">sensitive</option>
+        <option value="other">other</option>
+      </select>
+      <button class="reject">Reject</button>`;
+    div.querySelector('.approve').addEventListener('click', async () => {
+      await api(`/api/hitl/${item.item_id}/approve`, { method: 'POST' });
+      loadHitl(); loadStatus();
+    });
+    div.querySelector('.reject').addEventListener('click', async () => {
+      const reason = div.querySelector('.reason').value;
+      await api(`/api/hitl/${item.item_id}/reject`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ reason }) });
+      loadHitl(); loadStatus();
+    });
+    el.appendChild(div);
+  }
+}
+
+async function loadMetrics() {
+  const data = await api('/api/metrics');
+  const el = $('#metrics-out');
+  if (!Object.keys(data).length) { el.innerHTML = '<p class="muted">No runs yet. Run all 36 tickets first.</p>'; return; }
+  el.innerHTML = '';
+  for (const [runId, summary] of Object.entries(data)) {
+    const div = document.createElement('div');
+    div.className = 'card';
+    let rows = '';
+    for (const [group, agg] of Object.entries(summary)) {
+      if (!agg.n) continue;
+      rows += `<tr><td>${group}</td><td>${agg.n}</td><td>${agg.m1_seconds.mean}</td><td>${agg.m4_total_tokens.mean}</td><td>${agg.m5_steps.mean}</td><td>${agg.m8_quality_auto.mean}</td><td>${agg.hit_rate ?? '—'}</td><td>${agg.abstention_rate ?? '—'}</td><td>${agg.escalation_rate}</td><td>${agg.verified_rate}</td></tr>`;
+    }
+    div.innerHTML = `<h3>Run ${runId}</h3>
+      <table><thead><tr><th>group</th><th>n</th><th>time mean (s)</th><th>tokens mean</th><th>steps mean</th><th>quality mean</th><th>hit rate</th><th>abstention</th><th>escalation</th><th>verified</th></tr></thead><tbody>${rows}</tbody></table>`;
+    el.appendChild(div);
+  }
+}
+
+$('#run-all').addEventListener('click', async () => {
+  const cond = $('#condition').value;
+  await api('/api/run-all', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ condition: cond, run_no: 1 }) });
+  const iv = setInterval(async () => {
+    const s = await api('/api/run-status');
+    $('#run-status').textContent = s.running ? `running ${s.done}/${s.total}…` : 'done';
+    if (!s.running) { clearInterval(iv); loadMetrics(); loadInbox(); }
+  }, 2000);
+});
+
+$('#run-one').addEventListener('click', () => runTicket($('#trace-ticket').value));
+
+loadStatus(); loadInbox();
+</script>
+</body>
+</html>

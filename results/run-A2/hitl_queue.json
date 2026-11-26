@@ -1,0 +1,482 @@
+{
+  "items": [
+    {
+      "item_id": "hitl-370e3ea5",
+      "ticket_id": "T-001",
+      "cluster": "C1",
+      "memory_text": "FIX [C1 — Stripe webhooks stopped working after we rotated our API keys]\nDiagnosis: Maya Chen from Bloom & Co (Growth plan) rotated their Stripe API keys/secrets yesterday, causing all Stripe webhook events to be rejected with HTTP 400 errors because the webhook signing secret stored in OrderLoop no longer matches Stripe. Consequently, 14 orders (latest ORD-88412) are stuck as 'Awaiting payment'. According to the KB article 'Rotating Your Stripe Webhook Signing Secret', this mismatch results in 400 errors and requires updating the webhook signing secret in OrderLoop and replaying failed events.\nSteps:\n1. Update the Stripe webhook signing secret with the confirmed new secret ('whsec_NEW')\n2. Replay the failed webhook events to process the 14 stuck orders\n3. Verify webhook status and ensure events are delivering successfully\nVerified in mock: secret_updated=True, test_event_200=False, failed_events_replayed=False\nSource ticket: T-001",
+      "metadata": {
+        "ticket_id": "T-001",
+        "cluster": "C1",
+        "memory_key": "T-001",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:00:21+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-15485b11",
+      "ticket_id": "T-004",
+      "cluster": "C2",
+      "memory_text": "FIX [C2 — SSO login loop — users redirected back to login after authenticating via Okta]\nDiagnosis: Sarah Lindqvist (Nordwind Retail Group, Scale plan) reports that users are caught in an SSO login loop: they authenticate successfully in Okta via SAML 2.0 and are bounced straight back to the login page without an error message. According to the KB article 'Setting Up SSO/SAML and Renewing Your IdP Certificate', this symptom matches an expired IdP X.509 certificate (which typically expires after about one year, matching their 11-month setup). We should check the SAML status for the customer to confirm the certificate/integration state.\nSteps:\n1. Check SAML status using get_saml_status to verify configuration and certificate expiration.\n2. Verify if the SAML status test login or metadata indicates an expired certificate.\nVerified in mock: metadata_uploaded=False, sso_login_ok=False\nSource ticket: T-004",
+      "metadata": {
+        "ticket_id": "T-004",
+        "cluster": "C2",
+        "memory_key": "T-004",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:00:28+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-eb545b34",
+      "ticket_id": "T-007",
+      "cluster": "C3",
+      "memory_text": "FIX [C3 — Incorrect VAT on invoice INV-2026-4417 after plan upgrade]\nDiagnosis: Tom Becker, Finance Lead at Becker Office Supplies, upgraded from Growth ($79) to Scale ($199) mid-cycle on 10 December. Invoice INV-2026-4417 was generated without the proration credit for the unused days of the Growth plan, resulting in incorrect VAT calculation and an overcharge. Per the knowledge base, a proration credit must be applied and the invoice reissued.\nSteps:\n1. Verify invoice INV-2026-4417 using get_invoice\n2. Apply the proration credit using apply_proration_credit with a positive amount\n3. Reissue the invoice using reissue_invoice\nVerified in mock: credit_applied=True, invoice_corrected=True\nSource ticket: T-007",
+      "metadata": {
+        "ticket_id": "T-007",
+        "cluster": "C3",
+        "memory_key": "T-007",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:00:57+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-e9b4b04c",
+      "ticket_id": "T-010",
+      "cluster": "C4",
+      "memory_text": "FIX [C4 — No push notifications on iPhone since app update 3.8.1]\nDiagnosis: Emily Ross (Petal & Post, Growth plan) is experiencing no push notifications on iPhone 15 running iOS 18.2 after updating the OrderLoop app to version 3.8.1. According to the KB article [iOS Push Notifications Troubleshooting], app updates and iOS updates can invalidate the registered device token and reset notification permissions. We need to check the device status, toggle iOS permissions, re-login the app, and send a test push.\nSteps:\n1. 1. Check current device status for the user.\n2. 2. Toggle iOS push notification permission.\n3. 3. Re-login the app to re-register the device token.\n4. 4. Send a test push notification to verify delivery.\nVerified in mock: ios_permission_on=False, token_registered=True, test_push_ok=False\nSource ticket: T-010",
+      "metadata": {
+        "ticket_id": "T-010",
+        "cluster": "C4",
+        "memory_key": "T-010",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:01:22+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-9d863a68",
+      "ticket_id": "T-013",
+      "cluster": "C5",
+      "memory_text": "FIX [C5 — Shopify stock levels not syncing — showing old quantities]\nDiagnosis: The Shopify stock levels are not syncing and the sync job is stuck at 'Running' following a large product import of 4,000 SKUs. According to the KB article and standard troubleshooting, we need to check the sync status, cancel the stuck sync job, and then either run a manual sync or enable incremental sync so quantities match correctly.\nSteps:\n1. Check the current sync status for the store.\n2. Cancel the stuck sync job.\n3. Run a manual sync to update inventory levels.\nVerified in mock: stuck_job_cancelled=True, incremental_enabled=False, inventory_match=True\nSource ticket: T-013",
+      "metadata": {
+        "ticket_id": "T-013",
+        "cluster": "C5",
+        "memory_key": "T-013",
+        "source": "agent",
+        "agent": "specialist",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "specialist",
+      "proposed_at": "2026-11-26T05:02:11+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-2b8b74e4",
+      "ticket_id": "T-016",
+      "cluster": "C6",
+      "memory_text": "FIX [C6 — Sales report times out when I select last 12 months]\nDiagnosis: David Chen is attempting to run a raw Sales Overview report for the last 12 months with 25,000 orders, causing it to exceed the 30-second query timeout. Per the KB article 'Large Reports and Aggregation', ranges over 90 days should use the pre-aggregated summary report instead of raw order lists.\nSteps:\n1. Advise David Chen to use the pre-aggregated summary report for long date ranges instead of the raw sales report.\n2. Schedule or generate the Sales Overview using the aggregated yearly summary report via the reporting tool.\nVerified in mock: report_ready=False\nSource ticket: T-016",
+      "metadata": {
+        "ticket_id": "T-016",
+        "cluster": "C6",
+        "memory_key": "T-016",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:02:19+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-fb6d61f2",
+      "ticket_id": "T-019",
+      "cluster": "C7",
+      "memory_text": "FIX [C7 — Product CSV import fails — \"Invalid file format\" error]\nDiagnosis: Anna Kowalski is attempting to import a product CSV file prepared in Microsoft Excel, which defaults to ANSI (Windows-1250/1252) encoding instead of UTF-8. Because the file contains special characters (Polish ł, ę, ś and French accents é, è), OrderLoop's importer rejects the file with 'Invalid file format' before processing any rows, as detailed in the UTF-8 Encoding knowledge base article.\nSteps:\n1. Validate the uploaded CSV file structure and format.\n2. Convert the CSV file encoding to UTF-8 using the customer UTF-8 conversion tool.\n3. Execute the product import using the properly encoded CSV file.\nVerified in mock: encoding_utf8=False, import_ok=False\nSource ticket: T-019",
+      "metadata": {
+        "ticket_id": "T-019",
+        "cluster": "C7",
+        "memory_key": "T-019",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:03:10+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-c0837811",
+      "ticket_id": "T-022",
+      "cluster": "C8",
+      "memory_text": "FIX [C8 — Locked out — 2FA codes from new phone not working]\nDiagnosis: Michael Torres (account owner and sole admin on Scale plan) got a new phone, and his authenticator app did not transfer the TOTP entry. His codes are rejected as 'invalid code' and he is locked out without valid recovery codes.\nSteps:\n1. Verify Michael's identity as the account owner.\n2. Trigger the 2FA reset for the account.\n3. Re-enroll 2FA for the user upon next login.\nVerified in mock: twofa_reset=False, reenrolled=False\nSource ticket: T-022",
+      "metadata": {
+        "ticket_id": "T-022",
+        "cluster": "C8",
+        "memory_key": "T-022",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:03:20+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-e7a9fa9c",
+      "ticket_id": "U-01",
+      "cluster": "unique",
+      "memory_text": "FIX [unique — Charged twice for December subscription — refund request]\nDiagnosis: The customer Alice Nguyen (Saigon Snacks, Growth plan) was charged twice for her December subscription ($79 on 1 Dec and $79 on 2 Dec) for invoice INV-2026-4471. Per the Refunds KB article, duplicate charges must be verified in the billing record and then refunded.\nSteps:\n1. Check the billing record for invoice INV-2026-4471 to verify the duplicate charge.\n2. Refund the duplicate charge through the payment processor.\nVerified in mock: refund_issued=False\nSource ticket: U-01",
+      "metadata": {
+        "ticket_id": "U-01",
+        "cluster": "unique",
+        "memory_key": "U-01",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:03:55+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-c18341e4",
+      "ticket_id": "U-02",
+      "cluster": "unique",
+      "memory_text": "FIX [unique — API rate limit increase request — 1,000 req/min not enough]\nDiagnosis: Ken Watanabe (Tokyo Tools KK, Scale plan) is hitting the 1,000 req/min API rate limit (HTTP 429) due to polling order status for ~40 stores to build a real-time dashboard. Per the KB and plan matrix, Scale plan is limited to 1,000 req/min, whereas Enterprise supports 5,000 req/min. Additionally, polling in a tight loop is discouraged in favor of webhooks. Since Ken explicitly asked if they should switch to webhooks or move to Enterprise, and our tools include 'increase_rate_limit' or 'switch_to_webhooks', we should check their current API usage first using 'get_api_usage' before deciding or offering an upgrade.\nSteps:\n1. Check current API usage using get_api_usage\n2. Confirm rate limit status and usage patterns\n3. Advise customer on switching to webhooks or upgrading to Enterprise for 5,000 req/min\nVerified in mock: limit_or_webhook=False\nSource ticket: U-02",
+      "metadata": {
+        "ticket_id": "U-02",
+        "cluster": "unique",
+        "memory_key": "U-02",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:03:59+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-2d04e02a",
+      "ticket_id": "U-03",
+      "cluster": "unique",
+      "memory_text": "FIX [unique — GDPR erasure request — delete all data for customer j.dupont@example.fr]\nDiagnosis: Charlotte Dubois, DPO at Maison Lumière, submitted a GDPR Article 17 erasure request for customer Jean Dupont (j.dupont@example.fr), asking for the complete deletion of personal data including order history, addresses, and support tickets, referencing GDPR-2026-118. The available mock operations include 'erase_customer_data' which is designed to execute this operation safely according to GDPR requirements.\nSteps:\n1. Identify the customer email for erasure: j.dupont@example.fr\n2. Execute the data erasure operation using erase_customer_data\n3. Confirm completion and scope of deletion to the customer, noting statutory tax/invoice retention exceptions if applicable.\nVerified in mock: erasure_done=True\nSource ticket: U-03",
+      "metadata": {
+        "ticket_id": "U-03",
+        "cluster": "unique",
+        "memory_key": "U-03",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:04:02+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-20905bfd",
+      "ticket_id": "U-04",
+      "cluster": "unique",
+      "memory_text": "FIX [unique — Barcode scanner won't connect to the mobile app]\nDiagnosis: The customer is experiencing an issue where a Zebra DS2278 Bluetooth barcode scanner pairs with their Samsung tablet via Bluetooth settings, but the OrderLoop app does not register any scans. The available mock operations include 'set_scanner_mode', 'grant_permissions', and 'pair_scanner_in_app' which are designed for handling barcode scanner connectivity and pairing issues in the mobile app.\nSteps:\n1. Check the device and scanner connection status using get_device_status\n2. Set the scanner mode for the Zebra DS2278 to ensure compatibility with the mobile app\n3. Pair the scanner within the OrderLoop app using pair_scanner_in_app\n4. Verify the device status to ensure the scanner is successfully connected and registering scans\nVerified in mock: scanner_spp=False, permissions=False, paired_in_app=False\nSource ticket: U-04",
+      "metadata": {
+        "ticket_id": "U-04",
+        "cluster": "unique",
+        "memory_key": "U-04",
+        "source": "agent",
+        "agent": "specialist",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "specialist",
+      "proposed_at": "2026-11-26T05:04:07+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-bf28d2eb",
+      "ticket_id": "U-05",
+      "cluster": "unique",
+      "memory_text": "FIX [unique — Rounding differences in multi-currency sales report (EUR/USD)]\nDiagnosis: Sofia Rossi from Milano Moda reports rounding differences in multi-currency sales reports (EUR/USD) causing reconciliation issues with their accounting system. They wish to know if this is known and whether reports can be configured to use 4 decimal places instead of 2.\nSteps:\n1. Check known issues regarding currency rounding in reports\n2. Configure currency rounding settings to support 4 decimal places for the customer's reports\n3. Verify the setting change and reply to the customer with confirmation\nVerified in mock: rounding_total=False, report_regenerated=False\nSource ticket: U-05",
+      "metadata": {
+        "ticket_id": "U-05",
+        "cluster": "unique",
+        "memory_key": "U-05",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:04:10+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-72561329",
+      "ticket_id": "U-06",
+      "cluster": "unique",
+      "memory_text": "FIX [unique — Scheduled weekly report email never arrives]\nDiagnosis: Raj Patel set up a scheduled weekly sales report, but it never arrives via email even though running it manually works. Checking the available tools, reports can be managed, scheduled, tested, and regenerated. Specifically, `schedule_report` schedules it, `activate_schedule` activates a schedule, and `send_report_now` sends it immediately. Let's inspect the report configuration or trigger sending/regeneration/activation.\nSteps:\n1. Check report schedule status or schedule report\n2. Trigger send_report_now to test email delivery for the scheduled report\nVerified in mock: schedule_active=False, report_sent=False\nSource ticket: U-06",
+      "metadata": {
+        "ticket_id": "U-06",
+        "cluster": "unique",
+        "memory_key": "U-06",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:04:11+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-4ea25647",
+      "ticket_id": "U-07",
+      "cluster": "unique",
+      "memory_text": "FIX [unique — Can we merge two OrderLoop accounts into one?]\nDiagnosis: Customer Emma Wilson accidentally created two OrderLoop accounts (Sydney: emma@wilsonandco.au and Melbourne: ops@wilsonandco.au) on the Growth plan and wants to merge them into a single account under the Sydney login while keeping both stores and order history.\nSteps:\n1. Check KB article on merging accounts to verify feasibility\n2. Execute account merge operation combining Melbourne into Sydney account\nVerified in mock: accounts_merged=False\nSource ticket: U-07",
+      "metadata": {
+        "ticket_id": "U-07",
+        "cluster": "unique",
+        "memory_key": "U-07",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:04:13+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-5348ff30",
+      "ticket_id": "U-08",
+      "cluster": "unique",
+      "memory_text": "FIX [unique — order.created webhook missing our custom field \"loyalty_tier\"]\nDiagnosis: Could not parse a plan; escalating.\nSteps:\n1. (no steps recorded — see executed operations)\nVerified in mock: custom_fields_enabled=False, test_event_200=False\nSource ticket: U-08",
+      "metadata": {
+        "ticket_id": "U-08",
+        "cluster": "unique",
+        "memory_key": "U-08",
+        "source": "agent",
+        "agent": "specialist",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "specialist",
+      "proposed_at": "2026-11-26T05:04:20+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    },
+    {
+      "item_id": "hitl-ada6422a",
+      "ticket_id": "U-09",
+      "cluster": "unique",
+      "memory_text": "FIX [unique — app crashes on my Samsung phone]\nDiagnosis: Yusuf Demir reports that the OrderLoop mobile app crashes when opening the Orders tab on his Samsung Galaxy A52 running Android 12. The retrieved memory and KB articles are for iOS push notifications, Stripe webhooks, and reports, which are completely unrelated to Android app crashes. Therefore, used_memory is false. We need to diagnose fresh and check the device status.\nSteps:\n1. Check the device status for the user's Samsung device\n2. Toggle or apply mobile workaround if applicable, or escalate to human support if device-specific crash requires engineering fix\nVerified in mock: workaround_applied=False, release_notified=False\nSource ticket: U-09",
+      "metadata": {
+        "ticket_id": "U-09",
+        "cluster": "unique",
+        "memory_key": "U-09",
+        "source": "agent",
+        "agent": "triage",
+        "run_id": "A2"
+      },
+      "status": "pending",
+      "proposed_by": "triage",
+      "proposed_at": "2026-11-26T05:04:22+00:00",
+      "decided_by": "",
+      "decided_at": "",
+      "reject_reason": "",
+      "note": ""
+    }
+  ],
+  "audit": [
+    {
+      "event": "proposed",
+      "item_id": "hitl-370e3ea5",
+      "ticket_id": "T-001",
+      "at": "2026-11-26T05:00:21+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-15485b11",
+      "ticket_id": "T-004",
+      "at": "2026-11-26T05:00:28+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-eb545b34",
+      "ticket_id": "T-007",
+      "at": "2026-11-26T05:00:57+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-e9b4b04c",
+      "ticket_id": "T-010",
+      "at": "2026-11-26T05:01:22+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-9d863a68",
+      "ticket_id": "T-013",
+      "at": "2026-11-26T05:02:11+00:00",
+      "by": "specialist"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-2b8b74e4",
+      "ticket_id": "T-016",
+      "at": "2026-11-26T05:02:19+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-fb6d61f2",
+      "ticket_id": "T-019",
+      "at": "2026-11-26T05:03:10+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-c0837811",
+      "ticket_id": "T-022",
+      "at": "2026-11-26T05:03:20+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-e7a9fa9c",
+      "ticket_id": "U-01",
+      "at": "2026-11-26T05:03:55+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-c18341e4",
+      "ticket_id": "U-02",
+      "at": "2026-11-26T05:03:59+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-2d04e02a",
+      "ticket_id": "U-03",
+      "at": "2026-11-26T05:04:02+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-20905bfd",
+      "ticket_id": "U-04",
+      "at": "2026-11-26T05:04:07+00:00",
+      "by": "specialist"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-bf28d2eb",
+      "ticket_id": "U-05",
+      "at": "2026-11-26T05:04:10+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-72561329",
+      "ticket_id": "U-06",
+      "at": "2026-11-26T05:04:11+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-4ea25647",
+      "ticket_id": "U-07",
+      "at": "2026-11-26T05:04:13+00:00",
+      "by": "triage"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-5348ff30",
+      "ticket_id": "U-08",
+      "at": "2026-11-26T05:04:20+00:00",
+      "by": "specialist"
+    },
+    {
+      "event": "proposed",
+      "item_id": "hitl-ada6422a",
+      "ticket_id": "U-09",
+      "at": "2026-11-26T05:04:22+00:00",
+      "by": "triage"
+    }
+  ]
+}

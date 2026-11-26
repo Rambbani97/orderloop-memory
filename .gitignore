@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+*.log
+.DS_Store
+.pytest_cache/
+# results/: official run dirs ARE published. Excluded: smoke-test stubs,
+# crash partials, and the leftover top-level queue.
+results/run-A1-partial-503/
+results/run-A1-partial-503-retry1/
+results/run-A1-partial-503-retry2/
+results/run-A1.jsonl
+results/run-B1.jsonl
+results/run-B0.jsonl
+results/run-A1-summary.json
+results/run-A1-summary.csv
+results/run-B1-summary.json
+results/run-B1-summary.csv
+results/hitl_queue.json
+results/spike-2026-11-26/*
+!results/spike-2026-11-26/spike-report.json
